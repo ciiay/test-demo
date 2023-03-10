@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: demoapp
+  namespace: demo
+spec:
+  containers:
+    - image: busybox
+      name: webapp
+      command: ["sh"]
+      args: ["-c", "sleep 80000"]
+      volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+  volumes:
+    - name: secrets-store-inline
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+            secretProviderClass: "vault-database"
