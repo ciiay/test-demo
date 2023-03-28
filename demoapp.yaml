@@ -2,7 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: demoapp
-  namespace: demo
+  namespace: openshift-gitops
 spec:
   containers:
     - image: busybox
